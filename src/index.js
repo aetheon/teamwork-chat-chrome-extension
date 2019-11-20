@@ -7,7 +7,7 @@ let gotApiKey
 let chatWebSocket = null
 
 chrome.runtime.onStartup.addListener(function () {
-  chrome.cookies.get({url: 'https://www.teamwork.com', name: 'userInstallation'}, function (cookie) {
+  chrome.cookies.get({url: 'https://divhide.teamwork.com', name: 'userInstallation'}, function (cookie) {
     if (cookie != null) {
       startUp()
     }
@@ -16,11 +16,11 @@ chrome.runtime.onStartup.addListener(function () {
 
 chrome.runtime.onInstalled.addListener(function () {
   chrome.cookies.get({url: 'https://www.teamwork.com', name: 'userInstallation'}, function (cookie) {
-    if (cookie != null) {
-      startUp()
-    } else {
-      changeIconOnError()
-    }
+    // if (cookie != null) {
+     startUp()
+    // } else {
+    //   changeIconOnError()
+    // }
   })
 })
 

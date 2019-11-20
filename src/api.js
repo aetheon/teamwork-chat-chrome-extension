@@ -21,26 +21,29 @@ function getUserProfile () {
 }
 
 function getUserProfileFromWebAddress () {
-  return new Promise((resolve, reject) => {
-    getTab()
-      .then(function (tabURL) {
-        return getInstallationURL(tabURL)
-      })
-      .then(function (installationName) {
-        userInstallation = installationName
-        let installationURL = installationName + '.teamwork.com/chat/v3/me?includeAuth=true'
-        return axios.get(installationURL)
-      })
-      .then(function (response) {
-        chrome.storage.local.set({userInstallation: userInstallation})
-        resolve(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-        changeIconOnError()
-        clearData()
-      })
-  })
+    return new Promise((resolve, reject) => {
+    // getTab()
+    //   .then(function (tabURL) {
+    //     return getInstallationURL(tabURL)
+    //   })
+    //   .then(function (installationName) {
+    //     userInstallation = installationName
+    //     let installationURL = installationName + '.teamwork.com/chat/v3/me?includeAuth=true'
+    //     return axios.get(installationURL)
+    //   })
+        return axios.get('https://divhide.teamwork.com/chat/v3/me?includeAuth=true')
+        .then(function(response) {
+            chrome.storage.local.set({
+                userInstallation: userInstallation
+            })
+            resolve(response.data)
+        })
+        .catch((error) => {
+            alert(error);
+            changeIconOnError()
+            clearData()
+        });
+    });
 }
 
 function getUserProfileFromLocalStorage () {
